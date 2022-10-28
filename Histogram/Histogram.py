@@ -1,10 +1,8 @@
 
 # Importy
 from ascii_graph import Pyasciigraph
-from ascii_graph import colors
 from ascii_graph.colors import *
 from ascii_graph.colordata import vcolor
-from ascii_graph.colordata import hcolor
 from rich.progress import track
 import time
 
@@ -36,16 +34,14 @@ with open (Nazwa,  'r', encoding='UTF-8') as f:
     #sortowanie i ograniczenie ilości wyświetlanych elementów    
     sortownica = []
     for key in hist:
-        sortownica.append((hist[key],key))
-    sortownica = sorted(sortownica)
+        sortownica.append((key, hist[key]))
+    sortownica.sort(key=lambda x: x[1])
     sortownica = sortownica[::-1]
     sortownica = sortownica[:Ilosc_max]
 
-
     # Wizualizacja
     Graph= Pyasciigraph()
-    pattern = [Gre, Yel, Red]
+    pattern = [Blu, Yel, Gre]
     data = vcolor(sortownica, pattern)
     for line in Graph.graph('Najbardziej cierpiące wyrazy', data):
         print(line)
-    # print(sortownica)
